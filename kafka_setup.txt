@@ -1,0 +1,36 @@
+# Download and extract Kafka
+wget https://downloads.apache.org/kafka/3.8.0/kafka_2.12-3.8.0.tgz  ## Check the latest version on Apache Kafka Website
+tar -xvf kafka_2.12-3.8.0.tgz
+
+# Check Java version
+java -version
+
+# Install Amazon Corretto Java Development Kit
+sudo yum install -y java-1.8.0-amazon-corretto-devel
+
+# Verify Java installation
+java -version
+
+# Navigate to Kafka directory
+cd kafka_2.12-3.8.0
+
+# Start ZooKeeper
+bin/zookeeper-server-start.sh config/zookeeper.properties &
+
+# Start Kafka Server
+echo "Starting Kafka Server..."
+export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
+bin/kafka-server-start.sh config/server.properties &
+
+# Update server.properties to use public IP
+"sudo nano config/server.properties" - change ADVERTISED_LISTENERS to public ip of the EC2 instance
+
+# Create Kafka Topic
+cd kafka_2.12-3.8.0
+bin/kafka-topics.sh --create --bootstrap-server <your_public_ip>:9092 --replication-factor 1 --partitions 1 --topic demo_test
+
+bin/kafka-console-producer.sh --bootstrap-server <your_public_ip>:9092 --topic demo_test  # Start Kafka Producer
+
+# Start Kafka Consumer
+cd kafka_2.12-3.8.0
+bin/kafka-console-consumer.sh --bootstrap-server <your_public_ip>:9092 --topic demo_test
