@@ -12,6 +12,9 @@ This project involves building a comprehensive, real-time data engineering pipel
 - **Apache Kafka** for real-time data streaming
 - **SQL** for querying data and analysis
 
+![Architecture](https://github.com/ak-abhilash/Real-Time-Stock-Market-Data-Pipeline-with-Kafka/blob/fd8d3e08fcf91b7fc716e759b63ff3d02a11f3b1/Architecture.jpg)
+
+
 ## Project Architecture
 
 This project architecture leverages Kafka for real-time data ingestion and various AWS services for data storage, cataloging, and querying. It is designed to illustrate a typical data engineering workflow for managing large-scale, streaming data.
